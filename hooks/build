@@ -14,5 +14,3 @@ docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 hubbuildtools/addfingerprint.sh tmp$$:latest $IMAGE_NAME
 
 docker rmi tmp$$:latest
-
-which jq
