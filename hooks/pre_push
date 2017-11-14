@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Fails if already uploaded to prevent a new version of the same contents
 # from landing.
