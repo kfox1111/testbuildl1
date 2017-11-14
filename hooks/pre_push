@@ -1,3 +1,5 @@
 #!/bin/bash
+echo intentionally exiting early to see what happens....
+exit -1
 docker tag $IMAGE_NAME $DOCKER_REPO:$(cat version)
 docker push $DOCKER_REPO:$(cat version)
