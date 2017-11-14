@@ -9,8 +9,10 @@ git clone https://github.com/kfox1111/hubbuildtools
 echo "Build hook running"
 docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
              --build-arg VCS_REF=`git rev-parse --short HEAD` \
--t tmp$$ .
+-t tmp$$:latest .
 
-hubbuildtools/addfingerprint.sh tmp$$ $IMAGE_NAME
+hubbuildtools/addfingerprint.sh tmp$$:latest $IMAGE_NAME
 
-docker rm -f tmp$$
+docker rm -f tmp$$:latest
+
+which jq
