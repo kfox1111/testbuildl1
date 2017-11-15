@@ -9,7 +9,7 @@ docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
              --build-arg VCS_REF=`git rev-parse --short HEAD` \
 -t tmp$$:1 .
 
-REVPREFIX=$(docker run -i --rm tmp$$:1 rpm --queryformat '%{Version}-%{Release}' ipmitool)
+REVPREFIX=$(docker run -i --rm tmp$$:1 rpm -q --queryformat '%{Version}-%{Release}' ipmitool)
 
 hubbuildtools/fetchnewrevision.sh "$DOCKER_REPO" latest "$REVPREFIX"
 
