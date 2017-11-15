@@ -5,6 +5,8 @@ set -e
 # from landing.
 hubbuildtools/hubcompare.sh "$DOCKER_REPO" latest "$IMAGE_NAME"
 
-docker tag $IMAGE_NAME $DOCKER_REPO:$(cat version)
-docker push $DOCKER_REPO:$(cat version)
+TAG=$(hubbuildtools/fetchlocalrevision.sh "$IMAGE_NAME")
+
+docker tag "$IMAGE_NAME" "$DOCKER_REPO:$TAG"
+docker push "$DOCKER_REPO:$TAG"
 
