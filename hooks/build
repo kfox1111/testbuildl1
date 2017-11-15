@@ -1,17 +1,9 @@
 #!/bin/bash
-# $IMAGE_NAME var is injected into the build so the tag is correct.
 set -e
 
 git clone https://github.com/kfox1111/hubbuildtools
 
-echo "Build hook running"
-docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-             --build-arg VCS_REF=`git rev-parse --short HEAD` \
--t tmp$$:1 .
+export AUTO_PREFIX="rpm-version-release"
+export AUTO_PREFIX_PACKAGE=ipmitool
 
-REVPREFIX=$(docker run -i --rm tmp$$:1 rpm -q --queryformat '%{Version}-%{Release}' ipmitool)
-
-hubbuildtools/addfingerprint.sh tmp$$:1 tmp$$:2
-bash -x hubbuildtools/addrevision.sh tmp$$:2 "$DOCKER_REPO" latest "$IMAGE_NAME" "$REVPREFIX"
-
-docker rmi tmp$$:1 tmp$$:2
+hubbuildtools/hubhookhelpers/build
