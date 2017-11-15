@@ -11,9 +11,7 @@ docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 
 REVPREFIX=$(docker run -i --rm tmp$$:1 rpm -q --queryformat '%{Version}-%{Release}' ipmitool)
 
-hubbuildtools/fetchnewrevision.sh "$DOCKER_REPO" latest "$REVPREFIX"
-
 hubbuildtools/addfingerprint.sh tmp$$:1 tmp$$:2
-hubbuildtools/addrevision.sh tmp$$:2 $IMAGE_NAME
+hubbuildtools/addrevision.sh tmp$$:2 "$DOCKER_REPO" latest "$IMAGE_NAME" "$REVPREFIX"
 
 docker rmi tmp$$:1 tmp$$:2
