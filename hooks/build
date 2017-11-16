@@ -4,5 +4,6 @@ git clone https://github.com/kfox1111/hubbuildtools
 
 export AUTO_PREFIX="rpm-version-release"
 export AUTO_PREFIX_PACKAGE=ipmitool
+export NEW_BUILD=1
 
 hubbuildtools/hubhookhelpers/build
